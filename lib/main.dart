@@ -3,6 +3,8 @@ import 'package:budgetapp/screens/startup.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import 'screens/newTask.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -208,7 +210,14 @@ class _MyHomePageState extends State<MyHomePage> {
               Icons.add,
               size: 40,
             ),
-            onPressed: () {}),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return const NewTask(); //name of stateful widget in new_task_screen. Then only it will work.
+                }),
+              );
+            }),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: BottomAppBar(
