@@ -37,172 +37,176 @@ class _MyHomePageState extends State<MyHomePage> {
   int cal = 0;
   int expense = 0;
   int income = 0;
-
+  int counter = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: SafeArea(child: Drawer()),
       backgroundColor: Colors.grey[200],
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              Container(
-                color: Colors.blue,
-                height: 170,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: Icon(
-                              Icons.date_range,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 2.0),
-                            child: Container(
-                              child: Text(
-                                "2022-02",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 3,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 2.0),
-                            child: Container(
-                              child: Text(
-                                "Balance",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 7,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: Container(
-                          child: Text(
-                            '$cal',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 7,
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: Container(
-                              child: Text(
-                                "Expenses: ",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: Text(
-                              '$expense',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 7,
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: Container(
-                              child: Text(
-                                "Income: ",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: Text(
-                              '$income',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                child: Column(
-                  children: [
-                    Container(
-                        color: Colors.white,
-                        height: 80,
-                        width: 410,
-                        child: Column(
+      body: Builder(builder: (context) {
+        return SafeArea(
+          child: Container(
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.blue,
+                  height: 170,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10.0, right: 230.0),
-                              child: Text(
-                                "Budget Setting",
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w500),
+                            Container(
+                              child: Icon(
+                                Icons.date_range,
+                                color: Colors.white,
+                                size: 20,
                               ),
                             ),
                             SizedBox(
-                              height: 20,
+                              width: 3,
                             ),
-                            LinearPercentIndicator(
-                              width: 400,
-                              animation: true,
-                              percent: 0,
-                              animationDuration: 1000,
-                              progressColor: Colors.blue,
-                              backgroundColor: Colors.grey[200],
+                            Padding(
+                              padding: const EdgeInsets.only(top: 2.0),
+                              child: Container(
+                                child: Text(
+                                  "2022-02",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 2.0),
+                              child: Container(
+                                child: Text(
+                                  "Balance",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
                             ),
                           ],
-                        )),
-                  ],
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Container(
+                            child: Text(
+                              '$cal',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Container(
+                                child: Text(
+                                  "Expenses: ",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                '$expense',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Container(
+                                child: Text(
+                                  "Income: ",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                '$income',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                Container(
+                  child: Column(
+                    children: [
+                      Container(
+                          color: Colors.white,
+                          height: 80,
+                          width: 410,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 10.0, right: 230.0),
+                                child: Text(
+                                  "Budget Setting",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              LinearPercentIndicator(
+                                width: 400,
+                                animation: true,
+                                percent: 0,
+                                animationDuration: 1000,
+                                progressColor: Colors.blue,
+                                backgroundColor: Colors.grey[200],
+                              ),
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FloatingActionButton(
@@ -229,12 +233,21 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
               children: [
-                IconButton(
-                  icon: Icon(Icons.menu_rounded),
-                  color: Colors.grey[400],
-                  iconSize: 45,
-                  onPressed: () {},
-                ),
+                Builder(builder: (context) {
+                  return IconButton(
+                    icon: Icon(Icons.menu_rounded),
+                    color: Colors.grey[400],
+                    iconSize: 45,
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                      print("I'm here");
+                    },
+
+                    /*onPressed: () {
+                          scaffoldKey.currentState?.openDrawer();
+                        }*/ //() => Scaffold.of(context).openDrawer(),
+                  );
+                }),
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: IconButton(
