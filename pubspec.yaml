@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   lottie:
+  intl:
 
   percent_indicator:
 

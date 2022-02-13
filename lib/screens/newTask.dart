@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 IconData icon = Icons.menu;
 MaterialColor back = Colors.amber;
@@ -11,9 +12,15 @@ class NewTask extends StatefulWidget {
 }
 
 class _NewTaskState extends State<NewTask> {
+  DateTime? _date = DateTime.now();
+  String today = "Today";
+  TextEditingController dateController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton:
+          FloatingActionButton(child: Icon(Icons.check), onPressed: () {}),
       body: SafeArea(
         child: Container(
           child: Column(
@@ -104,37 +111,57 @@ class _NewTaskState extends State<NewTask> {
                             children: [
                               Column(
                                 children: [
-                                  Row(
-                                    children: const <Widget>[
-                                      Icon(Icons.date_range),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text("Date"),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text("Today"),
-                                    ],
+                                  GestureDetector(
+                                    child: Row(
+                                      children: const <Widget>[
+                                        Icon(Icons.date_range),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text("Date"),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text("Today"),
+                                      ],
+                                    ),
+                                    onTap: () async {
+                                      DateTime? date = await showDatePicker(
+                                          context: context,
+                                          initialDate: _date == null
+                                              ? DateTime.now()
+                                              : _date!,
+                                          firstDate: DateTime.now(),
+                                          lastDate: DateTime(2050));
+                                      if (date != null) _date = date;
+                                      setState(() {});
+                                      var dateString =
+                                          DateFormat('EEEE, d MMM, yyyy ')
+                                              .format(date!);
+                                      dateController.text = dateString;
+                                    },
                                   ),
                                 ],
                               ),
                               Divider(),
-                              Column(children: [
-                                Row(
-                                  children: const <Widget>[
-                                    Icon(Icons.alarm),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Time"),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("22:00"),
-                                  ],
-                                ),
-                              ]),
+                              GestureDetector(
+                                child: Column(children: [
+                                  Row(
+                                    children: const <Widget>[
+                                      Icon(Icons.alarm),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text("Time"),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text("22:00"),
+                                    ],
+                                  ),
+                                ]),
+                                onTap: () {},
+                              ),
                               Divider(),
                               Column(children: [
                                 Row(
