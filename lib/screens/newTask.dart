@@ -16,78 +16,162 @@ class _NewTaskState extends State<NewTask> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: Container(
-            color: Colors.blue,
-            height: 170,
-            width: 410,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
+          child: Column(
+            children: [
+              Container(
+                color: Colors.blue,
+                height: 170,
+                width: 410,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                      ),
-                      onPressed: () => Navigator.pop(context, false),
+                    Column(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
+                          onPressed: () => Navigator.pop(context, false),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: IconButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) => buildSheet(),
+                                );
+                              },
+                              icon: CircleAvatar(
+                                radius: 100,
+                                backgroundColor: back,
+                                child: Icon(
+                                  icon,
+                                  size: 50,
+                                  color: Colors.white,
+                                ),
+                              )),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 310.0, top: 30.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: const [
+                              Text(
+                                "0",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "0=",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
+              ),
+              Container(
+                child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: IconButton(
-                          onPressed: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) => buildSheet(),
-                            );
-                          },
-                          icon: CircleAvatar(
-                            radius: 100,
-                            backgroundColor: back,
-                            child: Icon(
-                              icon,
-                              size: 50,
-                              color: Colors.white,
-                            ),
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 310.0, top: 30.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: const [
-                          Text(
-                            "0",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 35,
-                                fontWeight: FontWeight.w500),
+                      padding: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 0.0),
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              Column(
+                                children: [
+                                  Row(
+                                    children: const <Widget>[
+                                      Icon(Icons.date_range),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text("Date"),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text("Today"),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Divider(),
+                              Column(children: [
+                                Row(
+                                  children: const <Widget>[
+                                    Icon(Icons.alarm),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text("Time"),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text("22:00"),
+                                  ],
+                                ),
+                              ]),
+                              Divider(),
+                              Column(children: [
+                                Row(
+                                  children: const <Widget>[
+                                    Icon(
+                                      Icons.edit,
+                                      size: 22,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text("Remark"),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Flexible(
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                          hintText: "Write a note",
+                                          hintStyle: TextStyle(fontSize: 14),
+                                        ),
+                                        minLines: 1,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ]),
+                            ],
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "0=",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          )
-                        ],
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),
