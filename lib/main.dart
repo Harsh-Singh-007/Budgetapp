@@ -1,4 +1,4 @@
-import 'package:budgetapp/screens/diamond.dart';
+import 'package:budgetapp/icons/diamond.dart';
 import 'package:budgetapp/screens/startup.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
