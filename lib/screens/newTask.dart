@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 IconData icon = Icons.menu;
@@ -14,7 +15,11 @@ class NewTask extends StatefulWidget {
 class _NewTaskState extends State<NewTask> {
   DateTime? _date = DateTime.now();
   String today = "Today";
-  TextEditingController dateController = TextEditingController();
+  String time = "22:00";
+  TimeOfDay timeOfDay = TimeOfDay.now();
+  String taskName = " ";
+  String money = " ";
+  TextEditingController moneyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +52,7 @@ class _NewTaskState extends State<NewTask> {
                       height: 10,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
@@ -67,31 +73,47 @@ class _NewTaskState extends State<NewTask> {
                                 ),
                               )),
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(left: 310.0, top: 30.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: const [
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0=",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                        Flexible(
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 230.0),
+                                  child: Container(
+                                    width: 100.0,
+                                    child: TextField(
+                                      autocorrect: true,
+                                      onChanged: (String? value) {
+                                        money = value ?? money;
+                                      },
+                                      style: TextStyle(
+                                          fontSize: 30, color: Colors.white),
+                                      textAlign: TextAlign.right,
+                                      enableInteractiveSelection: false,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: "0",
+                                        hintStyle:
+                                            TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              )
-                            ],
+                                Text(
+                                  "0=",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -113,7 +135,7 @@ class _NewTaskState extends State<NewTask> {
                                 children: [
                                   GestureDetector(
                                     child: Row(
-                                      children: const <Widget>[
+                                      children: <Widget>[
                                         Icon(Icons.date_range),
                                         SizedBox(
                                           width: 10,
@@ -122,7 +144,7 @@ class _NewTaskState extends State<NewTask> {
                                         SizedBox(
                                           width: 10,
                                         ),
-                                        Text("Today"),
+                                        Text(today),
                                       ],
                                     ),
                                     onTap: () async {
@@ -138,7 +160,7 @@ class _NewTaskState extends State<NewTask> {
                                       var dateString =
                                           DateFormat('EEEE, d MMM, yyyy ')
                                               .format(date!);
-                                      dateController.text = dateString;
+                                      today = dateString.toString();
                                     },
                                   ),
                                 ],
@@ -147,7 +169,7 @@ class _NewTaskState extends State<NewTask> {
                               GestureDetector(
                                 child: Column(children: [
                                   Row(
-                                    children: const <Widget>[
+                                    children: <Widget>[
                                       Icon(Icons.alarm),
                                       SizedBox(
                                         width: 10,
@@ -156,16 +178,29 @@ class _NewTaskState extends State<NewTask> {
                                       SizedBox(
                                         width: 10,
                                       ),
-                                      Text("22:00"),
+                                      Text(time),
                                     ],
                                   ),
                                 ]),
-                                onTap: () {},
+                                onTap: () async {
+                                  TimeOfDay? pickedTime = await showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay.now(),
+                                  );
+                                  if (pickedTime != null) {
+                                    timeOfDay = pickedTime;
+                                    setState(
+                                        () {}); //it is helping to make the icon invisible
+                                    var timeString = pickedTime.format(
+                                        context); //this is used to change the format of the date. (EEEE) means days of the week. (d) means date. (MMM) months and (yyyy) Years.
+                                    time = timeString.toString();
+                                  }
+                                },
                               ),
                               Divider(),
                               Column(children: [
                                 Row(
-                                  children: const <Widget>[
+                                  children: <Widget>[
                                     Icon(
                                       Icons.edit,
                                       size: 22,
@@ -179,6 +214,9 @@ class _NewTaskState extends State<NewTask> {
                                     ),
                                     Flexible(
                                       child: TextField(
+                                        onChanged: (String? value) {
+                                          taskName = value ?? taskName;
+                                        },
                                         decoration: InputDecoration(
                                           hintText: "Write a note",
                                           hintStyle: TextStyle(fontSize: 14),
