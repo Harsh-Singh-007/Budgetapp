@@ -8,7 +8,9 @@ class MenuList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Category Settings")),
       body: Container(
-        child: Container(color: Colors.blue,),
+        child: Container(
+          color: Colors.blue,
+        ),
       ),
     );
   }
