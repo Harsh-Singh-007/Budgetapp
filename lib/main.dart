@@ -1,5 +1,6 @@
 import 'package:budgetapp/icons/diamond.dart';
 import 'package:budgetapp/pagesBottomAppBar/diamond.dart';
+import 'package:budgetapp/pagesBottomAppBar/pie.dart';
 import 'package:budgetapp/screens/startup.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -172,34 +173,34 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     children: [
                       Container(
-                          color: Colors.white,
-                          height: 80,
-                          width: 410,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10.0, right: 230.0),
-                                child: Text(
-                                  "Budget Setting",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
-                                ),
+                        color: Colors.white,
+                        height: 80,
+                        width: 410,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10.0, right: 230.0),
+                              child: Text(
+                                "Budget Setting",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w500),
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              LinearPercentIndicator(
-                                width: 400,
-                                animation: true,
-                                percent: 60 / 100,
-                                animationDuration: 1000,
-                                progressColor: Colors.blue,
-                                backgroundColor: Colors.grey[200],
-                              ),
-                            ],
-                          )),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            LinearPercentIndicator(
+                              width: 400,
+                              animation: true,
+                              percent: 60 / 100,
+                              animationDuration: 1000,
+                              progressColor: Colors.blue,
+                              backgroundColor: Colors.grey[200],
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -266,7 +267,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: Icon(Icons.pie_chart),
                     color: Colors.grey[400],
                     iconSize: 40,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const PieChart(); //name of stateful widget in new_task_screen. Then only it will work.
+                          },
+                        ),
+                      );
+                    },
                   ),
                 ),
                 Padding(
