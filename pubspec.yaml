@@ -66,6 +66,7 @@ flutter:
 
   assets:
     - assets/e.json
+    - assets/c.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -82,6 +83,9 @@ flutter:
     - family: Diamond
       fonts:
             - asset: assets/icons/Diamond.ttf
+    - family: Excel
+      fonts:
+            - asset: assets/icons/Excel.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

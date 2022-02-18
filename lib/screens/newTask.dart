@@ -24,8 +24,11 @@ class _NewTaskState extends State<NewTask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-          FloatingActionButton(child: Icon(Icons.check), onPressed: () {}),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.check),
+          onPressed: () {
+            Navigator.pop(context);
+          }),
       body: SafeArea(
         child: Container(
           child: Column(

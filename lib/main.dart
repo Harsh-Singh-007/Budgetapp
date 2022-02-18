@@ -1,4 +1,5 @@
 import 'package:budgetapp/icons/diamond.dart';
+import 'package:budgetapp/pagesBottomAppBar/diamond.dart';
 import 'package:budgetapp/screens/startup.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -192,7 +193,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               LinearPercentIndicator(
                                 width: 400,
                                 animation: true,
-                                percent: 0,
+                                percent: 60 / 100,
                                 animationDuration: 1000,
                                 progressColor: Colors.blue,
                                 backgroundColor: Colors.grey[200],
@@ -210,18 +211,21 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FloatingActionButton(
-            child: Icon(
-              Icons.add,
-              size: 40,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
+          child: Icon(
+            Icons.add,
+            size: 40,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
                   return const NewTask(); //name of stateful widget in new_task_screen. Then only it will work.
-                }),
-              );
-            }),
+                },
+              ),
+            );
+          },
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: BottomAppBar(
@@ -240,7 +244,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     iconSize: 45,
                     onPressed: () {
                       Scaffold.of(context).openDrawer();
-                      print("I'm here");
                     },
 
                     /*onPressed: () {
@@ -272,7 +275,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: Icon(Diamond.logo),
                     color: Colors.grey[400],
                     iconSize: 45,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const DiamondButton(); //name of stateful widget in new_task_screen. Then only it will work.
+                          },
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
