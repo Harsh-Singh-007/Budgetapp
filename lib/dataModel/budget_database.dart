@@ -21,8 +21,7 @@ class BudgetDatabase {
       version: 1,
       onCreate: (Database db, int t) async {
         await db.execute(
-            'CREATE TABLE BUDGET (Id INTEGER PRIMARY KEY, value INTEGER, remark TEXT, date INTEGER, time TEXT, icon TEXT)'
-        );
+            'CREATE TABLE BUDGET (Id INTEGER PRIMARY KEY, value INTEGER, remark TEXT, date INTEGER, time TEXT, icon TEXT)');
       },
     );
     _database = taskDb;
@@ -38,11 +37,15 @@ class BudgetDatabase {
     return (null);
   }
 
-  static Future<List<Budget>?> getAllTask() async {
+  static Future<List<Budget>> getAllTask() async {
     var dbClient = await database;
     List<Map<String, dynamic>> taskListFromDB = await dbClient.query("BUDGET");
+    List<Budget> taskListAsObjects = [];
     for (var map in taskListFromDB) {
-      print(map);
+      taskListAsObjects.add(Budget.fromMap(map));
     }
+    return (taskListAsObjects);
+    //var taskListInMemory = taskListFromDB.map((t) => Task.fromMap(t)).toList();
+    //return (taskListInMemory);
   }
 }
