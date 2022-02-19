@@ -1,7 +1,8 @@
+import 'package:budgetapp/dataModel/budget_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-
+import 'rout.dart' as routing;
 IconData icon = Icons.menu;
 MaterialColor back = Colors.amber;
 
@@ -13,6 +14,10 @@ class NewTask extends StatefulWidget {
 }
 
 class _NewTaskState extends State<NewTask> {
+
+  int selectedTaskListID = 0;
+
+
   DateTime? _date = DateTime.now();
   String today = "Today";
   String time = "22:00";
@@ -26,9 +31,27 @@ class _NewTaskState extends State<NewTask> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.check),
-          onPressed: () {
-            Navigator.pop(context);
-          }),
+          onPressed: ()async {
+            Map<String, dynamic> budget = {
+              "Id": selectedTaskListID,
+              "value": money,
+              "remark": taskName,
+              "date": _date == null
+                  ? null
+                  : _date!.millisecondsSinceEpoch,
+              "time":
+              time == null ? null : time.toString(),
+              "icon": icon.toString(),
+            };
+            int? taskId = await BudgetDatabase.insetTask(budget);
+            if (taskId == null) {
+              print("Failed");
+            } else {
+              print("Sucess");
+              Navigator.pushNamedAndRemoveUntil(
+                  context, routing.homeScreenId, (route) => false);
+            }
+          },),
       body: SafeArea(
         child: Container(
           child: Column(

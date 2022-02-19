@@ -1,3 +1,4 @@
+import 'package:budgetapp/dataModel/budget_database.dart';
 import 'package:budgetapp/icons/diamond.dart';
 import 'package:budgetapp/pagesBottomAppBar/diamond.dart';
 import 'package:budgetapp/pagesBottomAppBar/menu.dart';
@@ -10,6 +11,8 @@ import 'icons/db_icons.dart';
 import 'screens/newTask.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  BudgetDatabase.initDB();
   runApp(const MyApp());
 }
 

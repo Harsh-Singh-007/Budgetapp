@@ -3,54 +3,46 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class BudgetDatabase {
-  static final BudgetDatabase instance = BudgetDatabase._init();
-
   static Database? _database;
 
-  BudgetDatabase._init();
-
-  Future<Database> get database async {
+  static Future<Database> get database async {
     if (_database != null) {
       return _database!;
-    } else {
-      _database = await _initDB('budget.db');
-      return _database!;
     }
+    _database = await initDB();
+    return _database!;
   }
 
-  Future<Database> _initDB(String filePath) async {
+  static initDB() async {
     final dbpath = await getDatabasesPath();
-    final path = join(dbpath, filePath);
-
-    return await openDatabase(path, version: 1, onCreate: _createDB);
-  }
-
-  Future _createDB(Database db, int version) async {
-    final idtype = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    final integervalue = 'INTEGER NOT NULL';
-    final integerdate = 'INTEGER NOT NULL';
-    final integertime = 'INTEGER NOT NULL';
-    final textremark = 'TEXT';
-    final texticon = 'TEXT NOT NULL';
-    await db.execute('''CREATE TABLE $tableBudget('
-        ${BudgetsFields.id} $idtype,
-        ${BudgetsFields.value} $integervalue,
-        ${BudgetsFields.date} $integerdate,
-        ${BudgetsFields.time} $integertime,
-        ${BudgetsFields.remark} $textremark,
-        ${BudgetsFields.icon} $texticon,')''');
-  }
-
-  /*Future<Budget> create(Budget budget) async {
-    final db = await instance.database;
-    final id = await db.insert(
-      tableBudget,
+    final path = join(dbpath, "budget.db");
+    var taskDb = await openDatabase(
+      path,
+      version: 1,
+      onCreate: (Database db, int t) async {
+        await db.execute(
+            'CREATE TABLE BUDGET (Id INTEGER PRIMARY KEY, value INTEGER, remark TEXT, date INTEGER, time TEXT, icon TEXT)'
+        );
+      },
     );
+    _database = taskDb;
+    return taskDb;
   }
-*/
-  Future close() async {
-    final db = await instance.database;
 
-    db.close();
+  static Future<int?> insetTask(Map<String, dynamic> taskData) async {
+    var dbClient = await database;
+    int id = await dbClient.insert("BUDGET", taskData);
+    if (id != null) {
+      return (id);
+    }
+    return (null);
+  }
+
+  static Future<List<Budget>?> getAllTask() async {
+    var dbClient = await database;
+    List<Map<String, dynamic>> taskListFromDB = await dbClient.query("BUDGET");
+    for (var map in taskListFromDB) {
+      print(map);
+    }
   }
 }

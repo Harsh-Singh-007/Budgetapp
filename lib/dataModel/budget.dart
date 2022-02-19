@@ -1,30 +1,41 @@
-import 'package:flutter/cupertino.dart';
-
-final String tableBudget = 'budget';
-
-class BudgetsFields {
-  static final String id = '_id';
-  static final String value = 'value';
-  static final String date = 'date';
-  static final String time = 'time';
-  static final String remark = 'remark';
-  static final String icon = 'icon';
-}
+import 'package:flutter/material.dart';
 
 class Budget {
-  final int? id;
-  final int value;
-  final DateTime date;
-  final DateTime time;
-  final String remark;
-  final IconData icon;
-
-  const Budget({
+  Budget({
     this.id,
     required this.value,
     required this.date,
-    required this.time,
-    required this.remark,
+    this.time,
+    this.remark,
     required this.icon,
   });
+
+  final int? id;
+  final int value;
+  final DateTime date;
+  final String? time;
+  String? remark;
+  final String icon;
+
+  static Budget fromMap(Map<String, dynamic> map) {
+    return (Budget(
+      id: map["Id"],
+      value: map["value"],
+      remark: map["remark"],
+      date: DateTime.fromMicrosecondsSinceEpoch(map["date"]),
+      time: map["time"],
+      icon: map["icon"],
+    ));
+  }
+
+  Map<String, dynamic> toMap() {
+    return ({
+      "Id": id,
+      "value": value,
+      "remark": remark,
+      "date": date == null ? null : date.millisecondsSinceEpoch,
+      "time": time == null ? null : time!,
+      "icon": icon,
+    });
+  }
 }
