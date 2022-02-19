@@ -51,10 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  color: Colors.blue,
-                  height: 170,
-                ),
+                Image.asset('assets/images/n.jpg'),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0, top: 30.0),
                   child: Text(
