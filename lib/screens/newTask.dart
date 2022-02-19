@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'rout.dart' as routing;
+
 IconData icon = Icons.menu;
 MaterialColor back = Colors.amber;
 
@@ -14,9 +15,7 @@ class NewTask extends StatefulWidget {
 }
 
 class _NewTaskState extends State<NewTask> {
-
   int selectedTaskListID = 0;
-
 
   DateTime? _date = DateTime.now();
   String today = "Today";
@@ -30,28 +29,25 @@ class _NewTaskState extends State<NewTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.check),
-          onPressed: ()async {
-            Map<String, dynamic> budget = {
-              "Id": selectedTaskListID,
-              "value": money,
-              "remark": taskName,
-              "date": _date == null
-                  ? null
-                  : _date!.millisecondsSinceEpoch,
-              "time":
-              time == null ? null : time.toString(),
-              "icon": icon.toString(),
-            };
-            int? taskId = await BudgetDatabase.insetTask(budget);
-            if (taskId == null) {
-              print("Failed");
-            } else {
-              print("Sucess");
-              Navigator.pushNamedAndRemoveUntil(
-                  context, routing.homeScreenId, (route) => false);
-            }
-          },),
+        child: Icon(Icons.check),
+        onPressed: () async {
+          Map<String, dynamic> budget = {
+            "Id": selectedTaskListID,
+            "value": money,
+            "remark": taskName,
+            "date": _date == null ? null : _date!.millisecondsSinceEpoch,
+            "time": time == null ? null : time.toString(),
+            "icon": icon,
+          };
+          int? taskId = await BudgetDatabase.insetTask(budget);
+          if (taskId == null) {
+            print("Failed");
+          } else {
+            print("Sucess");
+            Navigator.pop(context);
+          }
+        },
+      ),
       body: SafeArea(
         child: Container(
           child: Column(
