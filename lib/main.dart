@@ -44,9 +44,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Future<List<Budget>> taskList = BudgetDatabase.getAllTask();
   int cal = 0;
-  int expense = 0;
+  int expense = -5225;
+  int food = -825;
   int income = 0;
   int counter = 0;
+  int total = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 padding: const EdgeInsets.only(left: 8.0),
                                 child: Container(
                                   child: Text(
-                                    '$cal',
+                                    '$expense',
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 40,
@@ -250,6 +252,133 @@ class _MyHomePageState extends State<MyHomePage> {
                           ],
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          color: Colors.white,
+                          height: 165,
+                          width: 410,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                color: Colors.grey[300],
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text("15 Feb 2022"),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text("Expense: $total"),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 20,
+                                        backgroundColor: Colors.pinkAccent,
+                                        child: Icon(
+                                          Icons.shopping_bag_outlined,
+                                          size: 20,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 20.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Clothing",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18),
+                                            ),
+                                            Text(
+                                              "Zara",
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 160.0),
+                                        child: Text(
+                                          '$expense',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 25),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Divider(),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 20,
+                                        backgroundColor: back,
+                                        child: Icon(
+                                          Icons.restaurant,
+                                          size: 20,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 20.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Food",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 18),
+                                            ),
+                                            Text(
+                                              "Zomato",
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 200.0),
+                                        child: Text(
+                                          '-825',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 25),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ],
